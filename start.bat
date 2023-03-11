@@ -35,10 +35,10 @@ goto end
 if exist node_modules (
   @echo removing node_modules
   call rmdir node_modules /s /q
-  call npm cache clean --force & npm i
+  call npm cache clean --force & cnpm i
 ) else (
   @echo installing develop dependency
-  call npm cache clean --force & npm i
+  call npm cache clean --force & cnpm i
 )
 
 :dev
