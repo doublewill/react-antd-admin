@@ -10,7 +10,7 @@ MODE con: COLS=100 LINES=100
 @echo.
 @echo                      2. npm run build
 @echo.
-@echo                      2. install package
+@echo                      3. install package
 @echo
 @echo **********************************************************************
 
