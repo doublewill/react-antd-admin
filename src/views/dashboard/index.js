@@ -2,8 +2,7 @@ import { Card, Col, Row, Statistic, Space, Table, Tag, Avatar, List } from 'antd
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import DashboardColumn from './components/column';
 import DashboardLine from './components/line';
-import React, { useState } from 'react';
-import { getUserList, getArticleList } from '../../apis/user';
+import React, { useEffect, useState } from 'react';
 
 const columns = [
   {
@@ -24,57 +23,48 @@ const columns = [
     dataIndex: 'address',
     key: 'address',
   },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
-    ),
-  },
 ];
 
 function Dashboard() {
   const [userList = [], setUserList] = useState([]);
   const [articleList = [], setArticleList] = useState([]);
 
-  getArticleList().then((response) => {
-    setArticleList(response.data);
-  });
+  const fetUserList = () => {
+    fetch('http://127.0.0.1:9000/home/listUsers')
+      .then((response) => response.json())
+      .then((response) => {
+        setUserList(response.data);
+      });
+  };
 
-  getUserList().then((response) => {
-    setUserList(response.data);
-  });
+  const fetArticleList = () => {
+    fetch('http://127.0.0.1:9000/home/articleList')
+      .then((response) => response.json())
+      .then((response) => {
+        setArticleList(response.data);
+      });
+  };
+
+  useEffect(() => {
+    fetUserList();
+    fetArticleList();
+  }, []);
 
   return (
     <div className="page-content">
       <Row gutter={8} className="mb-lg">
-        <Col span={8}>
-          <Statistic title="Active Users" value={112893} />
+        <Col span={6}>
+          <Card bordered={false}>
+            <Statistic title="Active Users" value={112893} />
+          </Card>
         </Col>
 
-        <Col span={8}>
+        <Col span={6}>
+          <Card bordered={false}>
+            <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
+          </Card>
+        </Col>
+        <Col span={6}>
           <Card bordered={false}>
             <Statistic
               title="Active"
@@ -88,7 +78,7 @@ function Dashboard() {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <Card bordered={false}>
             <Statistic
               title="Idle"
@@ -112,7 +102,7 @@ function Dashboard() {
         </Col>
       </Row>
       <Row gutter={8} className="mb-lg">
-        <Col span={16}>
+        <Col span={12}>
           <Table
             columns={columns}
             dataSource={userList}
@@ -123,14 +113,14 @@ function Dashboard() {
             style={{ height: 500 }}
           ></Table>
         </Col>
-        <Col span={8}>
+        <Col span={12}>
           <List
             itemLayout="horizontal"
             dataSource={articleList}
             renderItem={(item, index) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={<Avatar src={`${item.src}?key=${index}`} />}
+                  avatar={<Avatar src={`${item.srcUrl}?key=${index}`} />}
                   title={<a href="https://ant.design">{item.title}</a>}
                   description={item.description}
                 />

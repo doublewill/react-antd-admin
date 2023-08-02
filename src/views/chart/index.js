@@ -1,8 +1,8 @@
-import { Col, Row } from "antd";
-import DashboardColumn from "./components/column";
-import DashboardLine from "./components/line";
+import { Col, Row } from 'antd';
+import DashboardColumn from './components/column';
+import DashboardLine from './components/line';
 
-function Dashboard() {
+function Chart() {
   return (
     <div className="page-content">
       <Row gutter={8} className="mb-lg">
@@ -16,4 +16,4 @@ function Dashboard() {
     </div>
   );
 }
-export default Dashboard;
+export default Chart;

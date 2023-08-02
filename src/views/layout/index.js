@@ -1,8 +1,8 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, PieChartOutlined, DesktopOutlined, FileOutlined } from '@ant-design/icons';
+import { UserOutlined, PieChartOutlined, DesktopOutlined, FileOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 function getItem({ label, icon, path, children = [] }) {
   return {
@@ -23,8 +23,6 @@ const items = [
 
 const AppLayout = () => {
   let navigate = useNavigate();
-
-  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -38,30 +36,26 @@ const AppLayout = () => {
 
   return (
     <Layout className="app-layout">
-      <Header
-        className="app-layout-header"
-        style={{
-          background: colorBgContainer,
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
         }}
       >
-        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-          className: 'trigger',
-          onClick: () => setCollapsed(!collapsed),
-        })}
-      </Header>
-      <Layout className="app-layout-content">
-        <Sider trigger={null} collapsible collapsed={collapsed} className="app-layout-sider">
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeMenu]} onClick={handleRouteChange} items={items} />
-        </Sider>
-        <Content
-          className="app-layout-inner"
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[activeMenu]} onClick={handleRouteChange} items={items} />
+      </Sider>
+      <Layout className="app-layout-inner">
+        <Header
           style={{
-            padding: 24,
             background: colorBgContainer,
           }}
-        >
-          <Outlet></Outlet>
+        />
+        <Content className="app-layout-content">
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
