@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Space, Table, Tag } from 'antd';
-import { getUserList } from '../../apis/user';
-
+import { getUserList } from '@/apis/user';
 
 function Dashboard() {
 
@@ -56,7 +55,7 @@ function Dashboard() {
 
   const deleteRecord = (record)=> {
     console.log(record);
-  }
+  };
 
   getUserList().then((response) => {
     setUserList(response.data);

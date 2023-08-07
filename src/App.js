@@ -1,11 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import Router from './router/index';
 
-import Login from './views/login/index';
-import Layout from './views/layout/index';
-import Dashboard from './views/dashboard/index';
-import Table from './views/table/index';
-import Chart from './views/chart/index';
+import Login from 'pages/login/index';
+import Layout from 'pages/layout/index';
+import Dashboard from 'pages/dashboard/index';
+import Table from 'pages/table/index';
+import Chart from 'pages/chart/index';
 
 function App() {
   return (
