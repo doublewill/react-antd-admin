@@ -24,7 +24,7 @@ app.get('/listUsers', function (req, res, next) {
 app.get('/articleList', function (req, res, next) {
   res.send({
     code: 200,
-    data: new Array(Random.integer(10, 30)).fill(1).map((c) => {
+    data: new Array(Random.integer(6, 7)).fill(1).map((c) => {
       return {
         description: Random.cparagraph(1, 3),
         title: Random.ctitle(),

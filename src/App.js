@@ -5,8 +5,24 @@ import Layout from 'pages/layout/index';
 import Dashboard from 'pages/dashboard/index';
 import Table from 'pages/table/index';
 import Chart from 'pages/chart/index';
+import { useDispatch } from 'react-redux';
+import  { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+  window.addEventListener('resize', () => {
+    dispatch({
+      type: 'app/updateClientHeight',
+      payload: document.body.clientHeight - 64
+    });
+  });
+
+  useEffect(() => {
+    dispatch({
+      type: 'app/updateClientHeight',
+      payload: document.body.clientHeight - 64
+    });
+  });
   return (
     <div className="App">
       <Routes>

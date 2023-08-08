@@ -1,4 +1,4 @@
-import { Card, Col, Row, Statistic, Space, Table, Tag, Avatar, List } from 'antd';
+import { Card, Col, Row, Statistic, Table, List } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import DashboardColumn from './components/column';
 import DashboardLine from './components/line';
@@ -107,10 +107,9 @@ function Dashboard() {
             columns={columns}
             dataSource={userList}
             scroll={{
-              y: 240,
+              y: 700,
             }}
             bordered
-            style={{ height: 500 }}
           ></Table>
         </Col>
         <Col span={12}>
@@ -120,8 +119,7 @@ function Dashboard() {
             renderItem={(item, index) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={<Avatar src={`${item.srcUrl}?key=${index}`} />}
-                  title={<a href="https://ant.design">{item.title}</a>}
+                  title={item.title}
                   description={item.description}
                 />
               </List.Item>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Table, Tag } from 'antd';
 import { getUserList } from '@/apis/user';
 
 function Dashboard() {
